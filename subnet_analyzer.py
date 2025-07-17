@@ -1,13 +1,16 @@
-import pandas as pd
-import ipaddress
-from collections import defaultdict
-import os
+import pandas as pd #For reading the Excel file and handling tabular data.
+import ipaddress #Built-in Python module to analyze IPs and subnets.
+from collections import defaultdict #Automatically assigns a default value to a key that does not yet exist.
+import os #To check if the script is running in Docker via an environment variable.
 
+#Docker Environment Check
 print("🟢 Running inside Docker container" if os.environ.get("DOCKER_ENV") else "🟢 Running locally")
 
+# Load IP data from Excel file
 file_path = "ip_data.xlsx"
 df = pd.read_excel(file_path)
 
+# Function to Analyze Each Row
 def analyze_row(ip, mask):
     try:
         network = ipaddress.IPv4Network(f"{ip}/{mask}", strict=False)
@@ -26,6 +29,7 @@ def analyze_row(ip, mask):
             "Usable Hosts": None
         }
 
+# Analyze each row and create a new DataFrame with results
 results = df.apply(lambda row: analyze_row(row['IP Address'], row['Subnet Mask']), axis=1)
 result_df = pd.concat([df, pd.DataFrame(results.tolist())], axis=1)
 
@@ -33,6 +37,7 @@ result_df.to_csv("subnet_report.csv", index=False)
 print("✅ Subnet Analysis Complete")
 print("✅ Report saved to subnet_report.csv")
 
+# Advanced Grouping of Subnets
 ip_list = list(df["IP Address"])
 subnet_data = []
 

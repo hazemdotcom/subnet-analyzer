@@ -8,7 +8,7 @@ df = pd.read_csv("subnet_report.csv")
 advanced_grouping = pd.read_csv("advanced_grouped_subnets.csv")
 
 plt.figure(figsize=(12, 6))
-plt.bar(advanced_grouping["CIDR"], advanced_grouping["IP Count"], color="orange")
+plt.bar(advanced_grouping["CIDR"], advanced_grouping["IP Count"], color="skyblue")
 plt.xticks(rotation=45, ha='right')
 plt.title("Number of IPs per Subnet")
 plt.xlabel("CIDR")
