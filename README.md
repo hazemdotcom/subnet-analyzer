@@ -6,23 +6,25 @@ This is a DevOps internship project for **Barq Systems**. The tool analyzes and 
 
 ## 📁 Files
 
-| File                           | Description                                         |
-| ------------------------------ | --------------------------------------------------- |
-| `subnet_analyzer.py`           | Main script: subnet analysis + bar chart generation |
-| `Dockerfile`                   | Docker setup to containerize the tool               |
-| `requirements.txt`             | List of required Python libraries                   |
-| `ip_data.xlsx`                 | Input file containing IPs and subnet masks          |
-| `subnet_report.csv`            | Output file with detailed subnet info               |
-| `advanced_grouped_subnets.csv` | Grouped summary by CIDR                             |
-| `network_plot.png`             | Bar chart showing usable hosts per subnet           |
-| `report.md`                    | Answers to analysis questions                        |
+| File                           | Description                                                     |
+| ------------------------------ | --------------------------------------------------------------- |
+| `subnet_analyzer.py`           | Main script: performs subnet analysis and generates CSV reports |
+| `visualize.py`                 | Script for generating visualizations from the analysis results  |
+| `Dockerfile`                   | Docker setup to containerize and automate the tool              |
+| `requirements.txt`             | List of required Python libraries for analysis and plotting     |
+| `ip_data.xlsx`                 | Input file containing IP addresses and subnet masks             |
+| `subnet_report.csv`            | Output: detailed subnet information per IP                      |
+| `advanced_grouped_subnets.csv` | Output: summary of IP counts grouped by subnet (CIDR)           |
+| `network_plot.png`             | Bar chart: number of IPs per subnet (CIDR)                      |
+| `hosts_per_subnet_chart.png`   | Bar chart: total usable hosts per subnet                        |
+| `report.md`                    | Project report with analysis documentation and explanations     |
 
 ---
 
 ## ⚙️ How to Run Locally
 
 1. **Create and activate a virtual environment**:
-
+> **Note:** Using a virtual environment keeps dependencies isolated from your global Python installation, preventing version conflicts and ensuring reproducible results.
    ```bash
    python -m venv venv
    source venv/Scripts/activate      # On Windows
@@ -38,13 +40,14 @@ This is a DevOps internship project for **Barq Systems**. The tool analyzes and 
 
    ```bash
    python subnet_analyzer.py
-   ```
+   python visualize.py  ```
 
    Output files will include:
 
    * `subnet_report.csv`
    * `advanced_grouped_subnets.csv`
    * `network_plot.png`
+   * `hosts_per_subnet_chart.png`
 
 ---
 
@@ -61,13 +64,14 @@ docker build -t subnet-analyzer .
 #### ✅ PowerShell / Git Bash:
 
 ```bash
-docker run --rm -v ${PWD}:/app subnet-analyzer
+docker run -v ${PWD}:/app subnet_analyzer
 ```
 
 #### ✅ CMD:
 
 ```cmd
-docker run --rm -v %cd%:/app subnet-analyzer
+docker run -v %cd%:/app subnet_analyzer
+```
 ```
 
 > This will run everything (including the chart generation) and output files will appear in your **local folder**.
@@ -79,6 +83,15 @@ docker run --rm -v %cd%:/app subnet-analyzer
 * **subnet\_report.csv** → Full subnet analysis (CIDR, usable hosts, etc.)
 * **advanced\_grouped\_subnets.csv** → Count of IPs per subnet
 * **network\_plot.png** → Bar chart visualizing usable hosts per subnet
+* **hosts\_per\_subnet\_chart.png** → Bar chart showing total usable hosts per subnet
+
+### 📈 Example Visualizations
+
+![Network Plot](network_plot.png)
+*Bar chart: Number of IPs per subnet (CIDR)*
+
+![Hosts per Subnet Chart](hosts_per_subnet_chart.png)
+*Bar chart: Total usable hosts per subnet*
 
 ---
 
