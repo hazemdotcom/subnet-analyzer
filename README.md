@@ -72,7 +72,6 @@ docker run -v ${PWD}:/app subnet_analyzer
 ```cmd
 docker run -v %cd%:/app subnet_analyzer
 ```
-```
 
 > This will run everything (including the chart generation) and output files will appear in your **local folder**.
 
@@ -80,17 +79,17 @@ docker run -v %cd%:/app subnet_analyzer
 
 ## 📊 Output
 
-* **subnet\_report.csv** → Full subnet analysis (CIDR, usable hosts, etc.)
-* **advanced\_grouped\_subnets.csv** → Count of IPs per subnet
-* **network\_plot.png** → Bar chart visualizing usable hosts per subnet
-* **hosts\_per\_subnet\_chart.png** → Bar chart showing total usable hosts per subnet
+* **subnet_report.csv** → Full subnet analysis (CIDR, usable hosts, etc.)
+* **advanced_grouped_subnets.csv** → Count of IPs per subnet
+* **network_plot.png** → Bar chart visualizing usable hosts per subnet
+* **hosts_per_subnet_chart.png** → Bar chart showing total usable hosts per subnet
 
 ### 📈 Example Visualizations
 
-![Network Plot](network_plot.png)
+![Network Plot](network_plot.png)  
 *Bar chart: Number of IPs per subnet (CIDR)*
 
-![Hosts per Subnet Chart](hosts_per_subnet_chart.png)
+![Hosts per Subnet Chart](hosts_per_subnet_chart.png)  
 *Bar chart: Total usable hosts per subnet*
 
 ---
@@ -118,4 +117,4 @@ docker run -v %cd%:/app subnet_analyzer
 
 ## 📧 Contact
 
-For any questions or feedback, please reach out to **Hazem** at hazem.a.m.bakr@gmail.com .
+For any questions or feedback, please reach out to **Hazem** at hazem.a.m.bakr@gmail.com.
