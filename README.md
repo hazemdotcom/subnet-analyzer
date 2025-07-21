@@ -46,7 +46,6 @@ This is a DevOps internship project for **Barq Systems**. The tool analyzes and 
 
    * `subnet_report.csv`
    * `advanced_grouped_subnets.csv`
-   * `network_plot.png`
    * `hosts_per_subnet_chart.png`
 
 ---
@@ -81,13 +80,9 @@ docker run -v %cd%:/app subnet_analyzer
 
 * **subnet_report.csv** → Full subnet analysis (CIDR, usable hosts, etc.)
 * **advanced_grouped_subnets.csv** → Count of IPs per subnet
-* **network_plot.png** → Bar chart visualizing usable hosts per subnet
 * **hosts_per_subnet_chart.png** → Bar chart showing total usable hosts per subnet
 
 ### 📈 Example Visualizations
-
-![Network Plot](network_plot.png)  
-*Bar chart: Number of IPs per subnet (CIDR)*
 
 ![Hosts per Subnet Chart](hosts_per_subnet_chart.png)  
 *Bar chart: Total usable hosts per subnet*

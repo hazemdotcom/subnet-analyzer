@@ -1,53 +1,30 @@
-# Subnet Analysis – Barq DevOps Internship Task
+# Network Subnet Analysis Report
 
-## 1. Which subnet has the most hosts?
+## 1. Subnet with the Most Hosts
+- **Subnet Mask:** `255.255.252.0` (`/22`)
+- **Usable Hosts:** 1022
 
-**Answer:**  
-Several subnets in the dataset have the highest number of usable hosts:  
-`/22` subnets, each with **1022 usable hosts**:
-- 192.168.100.0/22
-- 10.2.0.0/22
-- 10.20.4.0/22
-- 192.168.20.0/22
-- 10.3.0.0/22
-- 10.15.4.0/22
-- 172.16.60.0/22
-- 172.16.48.0/22
+## 2. Overlapping Subnets
+- **Findings:** No overlapping subnets detected.
+- **Reason:** All subnets belong to different private IP ranges.
 
-These subnets each support up to **1022 usable IP addresses**.
+## 3. Smallest and Largest Subnets
+| Metric      | Subnet Mask       | Prefix | Usable Hosts |
+|-------------|-------------------|--------|--------------|
+| **Smallest** | `255.255.255.0`   | `/24`  | 254          |
+| **Largest**  | `255.255.252.0`   | `/22`  | 1022         |
 
----
+## 4. Subnetting Strategy to Reduce Wasted IPs
+### Recommended Approach: Variable-Length Subnet Masking (VLSM)
+1. **Right-size subnets** based on actual host requirements:
+   - Use `/25` (126 hosts) for medium-sized networks
+   - Use `/26` (62 hosts) for smaller networks
+2. **Consolidate contiguous subnets**:
+   - Merge two `/24` subnets into one `/23` (510 hosts) if possible
+3. **Implementation Example**:
+   - Replace multiple `/24` subnets (e.g., `192.168.1.0/24`, `192.168.2.0/24`) with a single `/23` (`192.168.1.0/23`)
 
-## 2. Are there any overlapping subnets? If yes, which ones?
-
-**Answer:**  
-Based on the analysis script and data provided, each IP falls into a distinct subnet, and no subnet contains multiple IPs.  
-Therefore, **there are no overlapping subnets** in the given dataset.
-
-> (If you later modify the dataset to include similar IPs within the same subnet, the advanced grouping will catch overlaps.)
-
----
-
-## 3. What is the smallest and largest subnet in terms of address space?
-
-**Answer:**
-- **Smallest subnet**: `/24` subnet — contains **254 usable hosts**  
-
-
-- **Largest subnet**: `/22` subnet — contains **1022 usable hosts**  
-
-
-## 4. Suggest a subnetting strategy that could reduce wasted IPs in this network.
-
-**Answer:**  
-There is a large amount of wasted IP space in the current design. For example:
-- Subnets like `/22` are being used for just **1 device**
-- Even `/23` subnets with 510 usable hosts are underutilized
-
-To reduce IP waste:
-- Use **smaller subnets** like `/30` or `/29` for point-to-point links or very small networks.
-- Consider grouping hosts by function or department and assigning only the needed IPs.
-- Implement a **VLSM (Variable Length Subnet Masking)** strategy to allocate subnets based on actual host requirements.
-- This will free up valuable address space for future scaling and reduce routing overhead.
-
----
+### Benefits:
+- Minimizes unused IP addresses
+- Improves address space utilization
+- Maintains network segmentation requirements
